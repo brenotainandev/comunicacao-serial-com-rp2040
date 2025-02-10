@@ -81,7 +81,8 @@
       "top": 204.74,
       "left": 201.83,
       "attrs": { "i2cAddress": "0x3c" }
-    }
+    },
+    { "type": "wokwi-vcc", "id": "vcc6", "top": 163.96, "left": 211.2, "attrs": {} }
   ],
   "connections": [
     [ "pico:GP0", "$serialMonitor:RX", "", [] ],
@@ -183,7 +184,7 @@
     [ "oled1:SDA", "pico:GP14", "gold", [ "v0" ] ],
     [ "oled1:SCL", "pico:GP15", "purple", [ "v0" ] ],
     [ "pico:GND.5", "oled1:GND", "black", [ "h19.51", "v38.44", "h-153.6" ] ],
-    [ "pico:3V3_EN", "oled1:VCC", "red", [ "h29.11", "v182.4", "h-153.75" ] ]
+    [ "oled1:VCC", "vcc6:VCC", "red", [ "v0" ] ]
   ],
   "dependencies": {}
 }
