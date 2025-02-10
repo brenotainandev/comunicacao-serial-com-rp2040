@@ -35,7 +35,14 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(comunicacao-serial-com-rp2040 comunicacao-serial-com-rp2040.c )
+add_executable(comunicacao-serial-com-rp2040
+        comunicacao-serial-com-rp2040.c
+        src/matriz-led.c
+        src/led-rgb.c
+        src/botao.c
+        src/animacoes.c
+        src/ssd1306.c
+)
 
 pico_set_program_name(comunicacao-serial-com-rp2040 "comunicacao-serial-com-rp2040")
 pico_set_program_version(comunicacao-serial-com-rp2040 "0.1")
@@ -44,21 +51,22 @@ pico_set_program_version(comunicacao-serial-com-rp2040 "0.1")
 pico_enable_stdio_uart(comunicacao-serial-com-rp2040 1)
 pico_enable_stdio_usb(comunicacao-serial-com-rp2040 1)
 
+pico_generate_pio_header(comunicacao-serial-com-rp2040 ${CMAKE_CURRENT_LIST_DIR}/comunicacao_serial_com_rp2040.pio)
+
 # Add the standard library to the build
 target_link_libraries(comunicacao-serial-com-rp2040
-        pico_stdlib)
+        pico_stdlib
+        hardware_pio
+        hardware_adc
+        pico_bootrom
+        hardware_spi
+        hardware_i2c
+        )
 
 # Add the standard include files to the build
 target_include_directories(comunicacao-serial-com-rp2040 PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
 )
-
-# Add any user requested libraries
-target_link_libraries(comunicacao-serial-com-rp2040 
-        hardware_spi
-        hardware_i2c
-        
-        )
 
 pico_add_extra_outputs(comunicacao-serial-com-rp2040)
 
